@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Finteres</title>
+    <%- include("partials/head.ejs")%>
+</head>
+<body>
+    <%- include("partials/navbar.ejs")%>    
+    <% if ( success.length>0  ) { %>
+        <div class="my-alert alert-success animated fadeInUp" role="alert" id="alert" > <%= success %></div>        
+    <% }%>  
+    <% if ( message.length>0 ) { %>
+        <div class="my-alert alert-danger animated fadeInUp" role="alert" id="alert" > <%= message %></div>                
+        <% }%>  
+
+    <div class="container p-4">            
+            <div class="row">
+                    <% if ( images.length <=0 ) { %>
+                    <div class="col-md-6 offset-3">
+                        <h2 class="text-justify text-center text-danger">
+                            Image not found
+                        </h2>
+                    </div>
+    
+                    
+                        <% } else{ %>  
+                <div class="card-columns">
+                    <%  images.forEach(function(image){%>    
+                    <div class="card animated zoomIn ">
+                        <img class="card-img-top"  src="<%= image.url %>" alt="<%= image.path %>" >
+                        <div class="card-body">
+                            <h5 class="card-titlr"><%= image.title %></h5>
+                            <p class="card-text"><%= image.description %></p>
+                            <p class="card-text"><%= format(image.created_at) %></p>
+                            <a class="btn btn-primary"  href="/image/<%= image._id %>">View Profile</a>
+    
+                        </div>    
+                    </div>
+    
+    
+                    <% }) %>
+                </div>
+            </div>
+            <% } %>
+      
+    </div>
+    <script src="/scritp.js"></script>
+</body>
+</html>
